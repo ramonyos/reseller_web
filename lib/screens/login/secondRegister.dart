@@ -66,7 +66,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               },
               inputFormatters: [
                 // ignore: deprecated_member_use
-                WhitelistingTextInputFormatter(
+                FilteringTextInputFormatter.allow(
                   RegExp("[a-z A-Z]"),
                 ),
               ],

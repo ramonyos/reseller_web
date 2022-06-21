@@ -223,6 +223,12 @@ class Customer with ChangeNotifier {
     var btl = btlCus != "" || btlCus != null ? btlCus : "";
     var co = coCus != "" || coCus != null ? coCus : "";
     var br = brCus != "" || brCus != null ? brCus : "";
+    var toUser = null;
+    if (tid == null || tid == "") {
+      toUser == null;
+    } else {
+      toUser = tid;
+    }
 
     final Map<String, dynamic> bodyRaw = {
       "id": "$id",
@@ -242,7 +248,7 @@ class Customer with ChangeNotifier {
       "u2": "$nationID",
       "u3": "$uid",
       "u4": "t",
-      "u5": "$tid",
+      "u5": toUser,
       "province": "$province",
       "district": "$district",
       "commune": "$commune",
@@ -250,19 +256,7 @@ class Customer with ChangeNotifier {
       "curcode": "$curcodes",
       "idtype": "$idType"
     };
-    logger().e("body: $bodyRaw");
     try {
-      // final Response response = await api().put(
-      //   Uri.parse(baseURLInternal + 'CcfreferalCusUps/' + id),
-      //   headers: {
-      //     "content-type": "application/json",
-      //     "accept": "*/*",
-      //   },
-      //   body: json.encode(bodyRaw),
-      // );
-      // final parsed = jsonDecode(response.body);
-      // notifyListeners();
-      // return parsed;
       var headers = {'Content-Type': 'application/json'};
       var request = http.Request(
           'PUT', Uri.parse(baseURLInternal + 'CcfreferalCusUps/' + id));
@@ -305,7 +299,7 @@ class Customer with ChangeNotifier {
       }
     } catch (error) {
       logger().e("error: $error");
-      // _isFetching = false;
+      return error;
     }
   }
 

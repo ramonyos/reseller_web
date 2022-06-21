@@ -31,7 +31,7 @@ class VerifyProvider with ChangeNotifier {
         "uid": "",
         "sdate": "",
         "edate": "",
-        "status": "",
+        "status": changeStatus,
         "level": level
       });
       request.headers.addAll(headers);

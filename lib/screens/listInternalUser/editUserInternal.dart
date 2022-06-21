@@ -144,7 +144,7 @@ class _EditUserInternalState extends State<EditUserInternal> {
         "uid": "${widget.list["uid"]}",
         "uotpcode": "",
         "pwd": "${contorllerPassword.text}",
-        "level": levelUser,
+        "level": widget.list["level"],
         "utype": "$selectedValuePosition",
         "staffposition": "$selectedValuePosition",
         "staffid": "${contorllerStaffID.text}",
@@ -205,6 +205,7 @@ class _EditUserInternalState extends State<EditUserInternal> {
       return logoDarkBlue;
     }
 
+    logger().e("level: ${widget.list}");
     return Scaffold(
       key: _scaffoldKeyCreateAccountInternal,
       backgroundColor: Colors.white,
@@ -253,7 +254,8 @@ class _EditUserInternalState extends State<EditUserInternal> {
                       controller: contorllerNameRegister,
                       inputFormatters: [
                         // ignore: deprecated_member_use
-                        BlacklistingTextInputFormatter(RegExp("[0-9/\\\\|!.]")),
+                        FilteringTextInputFormatter.deny(
+                            RegExp("[0-9/\\\\|!.]")),
                       ],
                       icons: Icons.person,
                       hintText: AppLocalizations.of(context)!.staff_name + "*",

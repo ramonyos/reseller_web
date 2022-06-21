@@ -414,7 +414,7 @@ class _RequestDisbursementLoanState extends State<RequestDisbursement> {
                             controller: contorllerNameDetailCustomer,
                             inputFormatters: [
                               // ignore: deprecated_member_use
-                              WhitelistingTextInputFormatter(
+                              FilteringTextInputFormatter.allow(
                                 RegExp("[a-z A-Z]"),
                               ),
                             ],
@@ -994,7 +994,7 @@ class _RequestDisbursementLoanState extends State<RequestDisbursement> {
                             controller: contorllerLoanID,
                             inputFormatters: [
                               // ignore: deprecated_member_use
-                              WhitelistingTextInputFormatter(
+                              FilteringTextInputFormatter.allow(
                                 RegExp("[0-9]"),
                               ),
                             ],
@@ -1009,7 +1009,7 @@ class _RequestDisbursementLoanState extends State<RequestDisbursement> {
                             controller: contorllerAmount,
                             inputFormatters: [
                               // ignore: deprecated_member_use
-                              WhitelistingTextInputFormatter(
+                              FilteringTextInputFormatter.allow(
                                 RegExp("[0-9]"),
                               ),
                             ],
@@ -1079,7 +1079,7 @@ class _RequestDisbursementLoanState extends State<RequestDisbursement> {
                             controller: contorllerRemark,
                             inputFormatters: [
                               // ignore: deprecated_member_use
-                              WhitelistingTextInputFormatter(
+                              FilteringTextInputFormatter.allow(
                                 RegExp("[a-z A-Z]"),
                               ),
                             ],

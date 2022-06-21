@@ -26,46 +26,47 @@ class GroupFromBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: enabled
-          ? BoxDecoration(
-              border: Border.all(
-                color: logolightGreen,
+        decoration: enabled
+            ? BoxDecoration(
+                border: Border.all(
+                  color: logolightGreen,
+                ),
+                borderRadius: BorderRadius.circular(5.0))
+            : BoxDecoration(
+                border: Border(
+                    bottom: BorderSide(
+                //                   <--- left side
+                color: Colors.grey.shade500,
+                width: 0.0,
+              ))),
+        child: Container(
+          color: colors ?? null,
+          child: Row(
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Expanded(
+                child: FormBuilder(
+                    key: keys,
+                    // initialValue: {
+                    //   'date': DateTime.now(),
+                    //   'accept_terms': false,
+                    // },
+                    child: Column(
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        // mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            padding: enabled
+                                ? EdgeInsets.only(left: 10)
+                                : EdgeInsets.all(0),
+                            // width: isWeb() ? widthView(context, 0.5) : 350,
+                            child: childs,
+                          ),
+                        ])),
               ),
-              borderRadius: BorderRadius.circular(5.0))
-          : BoxDecoration(
-              border: Border(
-                  bottom: BorderSide(
-              //                   <--- left side
-              color: Colors.grey.shade500,
-              width: 0.0,
-            ))),
-      child: (Container(
-        color: colors ?? null,
-        child: Row(
-          // crossAxisAlignment: CrossAxisAlignment.center,
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            FormBuilder(
-                key: keys,
-                // initialValue: {
-                //   'date': DateTime.now(),
-                //   'accept_terms': false,
-                // },
-                child: Column(
-                    // crossAxisAlignment: CrossAxisAlignment.center,
-                    // mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        padding: enabled
-                            ? EdgeInsets.only(left: 10)
-                            : EdgeInsets.all(0),
-                        // width: isWeb() ? widthView(context, 0.5) : 350,
-                        child: childs,
-                      ),
-                    ])),
-          ],
-        ),
-      )),
-    );
+            ],
+          ),
+        ));
   }
 }

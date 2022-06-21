@@ -141,7 +141,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
     level = (await storage.getString('level'))!;
     converterToInt = int.parse(level);
-    logger().e("converterToInt: ${converterToInt}");
     if (converterToInt == 0) {
       listCard = [
         {

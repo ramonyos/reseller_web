@@ -35,7 +35,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
     });
     try {
       await Provider.of<VerifyProvider>(context, listen: false)
-          .fetchAllVerifyAccount(_pageSize, _pageNumber, _sdate, _edate, "")
+          .fetchAllVerifyAccount(_pageSize, _pageNumber, _sdate, _edate, "R")
           .then((value) {
         setState(() {
           listAccountUser = value;

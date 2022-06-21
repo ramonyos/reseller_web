@@ -22,7 +22,7 @@ import 'package:ccf_reseller_web_app/screens/home/home.dart';
 import 'package:http/http.dart' as http;
 import 'package:ccf_reseller_web_app/widgets/text_input_profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:path/path.dart' as Path;
+// import 'package:path/path.dart' as Path;
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -188,129 +188,129 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final StreamController<bool> streamController =
       StreamController<bool>.broadcast();
   Future<dynamic> updateUserProfile() async {
-    var name = contorllerNameProfile.text != ""
-        ? contorllerNameProfile.text
-        : listUser['refname'];
+    // var name = contorllerNameProfile.text != ""
+    //     ? contorllerNameProfile.text
+    //     : listUser['refname'];
 
-    setState(() {
-      _isLoading = true;
-    });
-    try {
-      final storage = await SharedPreferences.getInstance();
+    // setState(() {
+    //   _isLoading = true;
+    // });
+    // try {
+    //   final storage = await SharedPreferences.getInstance();
 
-      var uid = await storage.getString('user_id');
-      var dob;
-      if (dateOfBirth == null || dateOfBirth == "") {
-        dob = "";
-      } else {
-        dob = getDateTimeYMD(dateOfBirth.toString());
-      }
+    //   var uid = await storage.getString('user_id');
+    //   var dob;
+    //   if (dateOfBirth == null || dateOfBirth == "") {
+    //     dob = "";
+    //   } else {
+    //     dob = getDateTimeYMD(dateOfBirth.toString());
+    //   }
 
-      var phone;
-      // if (listUser['refphone'] != 0 ||
-      //     listUser['refphone'] != "" ||
-      //     listUser['refphone'] != null) {
-      //   phone = listUser['refphone'];
-      // } else {
-      //   phone = controllerPhoneProfile.text;
-      // }
+    //   var phone;
+    //   // if (listUser['refphone'] != 0 ||
+    //   //     listUser['refphone'] != "" ||
+    //   //     listUser['refphone'] != null) {
+    //   //   phone = listUser['refphone'];
+    //   // } else {
+    //   //   phone = controllerPhoneProfile.text;
+    //   // }
 
-      if (controllerPhoneProfile.text == "") {
-        phone = listUser['refphone'];
-      } else {
-        phone = controllerPhoneProfile.text;
-      }
+    //   if (controllerPhoneProfile.text == "") {
+    //     phone = listUser['refphone'];
+    //   } else {
+    //     phone = controllerPhoneProfile.text;
+    //   }
 
-      var gender;
-      if (selectedGender != "") {
-        gender = selectedGender;
-      } else {
-        gender = listUser['gender'];
-      }
-      var typeBank = _isSelectedBank != null
-          ? _isSelectedBank['name']
-          : listUser["typeaccountbank"];
-      var request = http.MultipartRequest(
-          'POST', Uri.parse(baseURLInternal + 'Document'));
-      request.fields.addAll({
-        'ucode': '${uid}',
-        'typeaccountbank': '${typeBank}',
-        'typeaccountnumber': '${controllerAccountBank.text}',
-        'idtype': '$selectedIDType',
-        'idnumber': '${controllerNID.text}',
-        'dob': '$dob',
-        'phone': '$phone',
-        'username': '$name',
-        'gender': '$gender'
-      });
-      Map<String, String> mediaType = {
-        'image': "jpg",
-        'image': "jpeg",
-        'image': "jpe"
-      };
-      //
-      var stream;
-      int length;
-      if (_image1 != null) {
-        stream =
-            // ignore: deprecated_member_use
-            new http.ByteStream(DelegatingStream.typed(_image1.openRead()));
-        length = fileName1.length;
-        request.files.add(new http.MultipartFile('kyc[101]', stream, length,
-            filename: Path.basename(fileName1),
-            contentType: MediaType('image', 'png', mediaType)));
-      }
-      var stream2;
-      var length2;
-      if (_image2 != null) {
-        stream2 =
-            // ignore: deprecated_member_use
-            new http.ByteStream(DelegatingStream.typed(_image2!.openRead()));
-        length2 = fileName2.length;
-        request.files.add(new http.MultipartFile('kyc[102]', stream2, length2,
-            filename: Path.basename(fileName2),
-            contentType: MediaType('image', 'png', mediaType)));
-      }
-      var stream3;
-      int length3;
-      if (_image3 != null) {
-        stream3 =
-            // ignore: deprecated_member_use
-            new http.ByteStream(DelegatingStream.typed(_image3!.openRead()));
-        length3 = fileName3.length;
-        request.files.add(new http.MultipartFile('kyc[103]', stream3, length3,
-            filename: Path.basename(fileName3),
-            contentType: MediaType('image', 'png', mediaType)));
-      }
-      await request.send().then((http.StreamedResponse response) async {
-        // ignore: unnecessary_null_comparison
-        if (response != null) {
-          setState(() {
-            _isLoading = false;
-          });
-          if (response.statusCode == 200 || response.statusCode == 201) {
-            showInSnackBar(AppLocalizations.of(context)!.successfully,
-                logolightGreen, _scaffoldKeyProfile);
-          } else {
-            var json = jsonDecode(await response.stream.bytesToString());
+    //   var gender;
+    //   if (selectedGender != "") {
+    //     gender = selectedGender;
+    //   } else {
+    //     gender = listUser['gender'];
+    //   }
+    //   var typeBank = _isSelectedBank != null
+    //       ? _isSelectedBank['name']
+    //       : listUser["typeaccountbank"];
+    //   var request = http.MultipartRequest(
+    //       'POST', Uri.parse(baseURLInternal + 'Document'));
+    //   request.fields.addAll({
+    //     'ucode': '${uid}',
+    //     'typeaccountbank': '${typeBank}',
+    //     'typeaccountnumber': '${controllerAccountBank.text}',
+    //     'idtype': '$selectedIDType',
+    //     'idnumber': '${controllerNID.text}',
+    //     'dob': '$dob',
+    //     'phone': '$phone',
+    //     'username': '$name',
+    //     'gender': '$gender'
+    //   });
+    //   Map<String, String> mediaType = {
+    //     'image': "jpg",
+    //     'image': "jpeg",
+    //     'image': "jpe"
+    //   };
+    //   //
+    //   var stream;
+    //   int length;
+    //   if (_image1 != null) {
+    //     stream =
+    //         // ignore: deprecated_member_use
+    //         new http.ByteStream(DelegatingStream.typed(_image1.openRead()));
+    //     length = fileName1.length;
+    //     request.files.add(new http.MultipartFile('kyc[101]', stream, length,
+    //         filename: Path.basename(fileName1),
+    //         contentType: MediaType('image', 'png', mediaType)));
+    //   }
+    //   var stream2;
+    //   var length2;
+    //   if (_image2 != null) {
+    //     stream2 =
+    //         // ignore: deprecated_member_use
+    //         new http.ByteStream(DelegatingStream.typed(_image2!.openRead()));
+    //     length2 = fileName2.length;
+    //     request.files.add(new http.MultipartFile('kyc[102]', stream2, length2,
+    //         filename: Path.basename(fileName2),
+    //         contentType: MediaType('image', 'png', mediaType)));
+    //   }
+    //   var stream3;
+    //   int length3;
+    //   if (_image3 != null) {
+    //     stream3 =
+    //         // ignore: deprecated_member_use
+    //         new http.ByteStream(DelegatingStream.typed(_image3!.openRead()));
+    //     length3 = fileName3.length;
+    //     request.files.add(new http.MultipartFile('kyc[103]', stream3, length3,
+    //         filename: Path.basename(fileName3),
+    //         contentType: MediaType('image', 'png', mediaType)));
+    //   }
+    //   await request.send().then((http.StreamedResponse response) async {
+    //     // ignore: unnecessary_null_comparison
+    //     if (response != null) {
+    //       setState(() {
+    //         _isLoading = false;
+    //       });
+    //       if (response.statusCode == 200 || response.statusCode == 201) {
+    //         showInSnackBar(AppLocalizations.of(context)!.successfully,
+    //             logolightGreen, _scaffoldKeyProfile);
+    //       } else {
+    //         var json = jsonDecode(await response.stream.bytesToString());
 
-            showInSnackBar(json['value'], Colors.red, _scaffoldKeyProfile);
-          }
-        }
-      }).catchError((onError) {
-        setState(() {
-          _isLoading = false;
-        });
-        showInSnackBar(onError.toString(), Colors.red, _scaffoldKeyProfile);
-      });
-    } catch (error) {
-      showInSnackBar(error.toString(), Colors.red, _scaffoldKeyProfile);
-      setState(() {
-        _isLoading = false;
-      });
-      showInSnackBar(
-          AppLocalizations.of(context)!.error, Colors.red, _scaffoldKeyProfile);
-    }
+    //         showInSnackBar(json['value'], Colors.red, _scaffoldKeyProfile);
+    //       }
+    //     }
+    //   }).catchError((onError) {
+    //     setState(() {
+    //       _isLoading = false;
+    //     });
+    //     showInSnackBar(onError.toString(), Colors.red, _scaffoldKeyProfile);
+    //   });
+    // } catch (error) {
+    //   showInSnackBar(error.toString(), Colors.red, _scaffoldKeyProfile);
+    //   setState(() {
+    //     _isLoading = false;
+    //   });
+    //   showInSnackBar(
+    //       AppLocalizations.of(context)!.error, Colors.red, _scaffoldKeyProfile);
+    // }
   }
 
   GlobalKey<ScaffoldState> _scaffoldKeyProfile = new GlobalKey<ScaffoldState>();
@@ -652,7 +652,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         controller: contorllerNameProfile,
                                         inputFormatters: [
                                           // ignore: deprecated_member_use
-                                          WhitelistingTextInputFormatter(
+                                          FilteringTextInputFormatter.allow(
                                             RegExp("[a-z A-Z]"),
                                           ),
                                         ],
@@ -888,7 +888,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         controller: controllerNID,
                                         inputFormatters: [
                                           // ignore: deprecated_member_use
-                                          WhitelistingTextInputFormatter(
+                                          FilteringTextInputFormatter.allow(
                                             RegExp("[0-9]"),
                                           ),
                                         ],
@@ -1145,7 +1145,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         controller: controllerAccountBank,
                                         inputFormatters: [
                                           // ignore: deprecated_member_use
-                                          WhitelistingTextInputFormatter(
+                                          FilteringTextInputFormatter.allow(
                                             RegExp("[0-9]"),
                                           ),
                                         ],

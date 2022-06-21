@@ -175,7 +175,8 @@ class _CreateAccountInternalState extends State<CreateAccountInternal> {
                       controller: contorllerNameRegister,
                       inputFormatters: [
                         // ignore: deprecated_member_use
-                        BlacklistingTextInputFormatter(RegExp("[0-9/\\\\|!.]")),
+                        FilteringTextInputFormatter.deny(
+                            RegExp("[0-9/\\\\|!.]")),
                       ],
                       icons: Icons.person,
                       hintText: AppLocalizations.of(context)!.staff_name + "*",

@@ -324,7 +324,7 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
                           controller: contorllerNameRegister,
                           inputFormatters: [
                             // ignore: deprecated_member_use
-                            BlacklistingTextInputFormatter(
+                            FilteringTextInputFormatter.deny(
                                 RegExp("[0-9/\\\\|!.]")),
                           ],
                           icons: Icons.person,
@@ -787,8 +787,6 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
                                       Colors.red,
                                       _scaffoldKeyRegister);
                                 }
-                                logger().e(
-                                    "selectedValueCurrencies: ${selectedValueCurrencies}");
                                 if (selectedValueCurrencies == "") {
                                   showInSnackBar(
                                       AppLocalizations.of(context)!

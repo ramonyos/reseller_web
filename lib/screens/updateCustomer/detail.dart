@@ -329,9 +329,9 @@ class _DetailListCustomerState extends State<DetailListCustomer> {
   String commune = "";
   String village = "";
   Future upDateCustomers() async {
-    // setState(() {
-    //   _isLoading = true;
-    // });
+    setState(() {
+      _isLoading = true;
+    });
     var cname = contorllerNameDetailCustomer.text;
     var phone = contorllerPhoneNumberDetailCustomer.text;
 
@@ -442,8 +442,12 @@ class _DetailListCustomerState extends State<DetailListCustomer> {
         setState(() {
           _isLoading = false;
         });
+        showInSnackBar(AppLocalizations.of(context)!.error, Colors.red,
+            _scaffoldKeyDetailListCustomer);
       });
     } catch (error) {
+      showInSnackBar(AppLocalizations.of(context)!.error, Colors.red,
+          _scaffoldKeyDetailListCustomer);
       setState(() {
         _isLoading = false;
       });
@@ -462,17 +466,20 @@ class _DetailListCustomerState extends State<DetailListCustomer> {
       } else {
         status = 'P';
       }
+
+      var toUser = null;
+      if (tuid == "" || tuid == null) {
+        toUser = null;
+      } else {
+        toUser = tuid;
+      }
       //
       var headers = {'Content-Type': 'application/json'};
       var request =
           http.Request('POST', Uri.parse(baseURLInternal + 'CcfcustAsigs'));
 
-      request.body = json.encode({
-        "cid": "$cid",
-        "fuid": "$uid",
-        "tuid": "$tuid",
-        "status": "$status"
-      });
+      request.body = json.encode(
+          {"cid": "$cid", "fuid": "$uid", "tuid": toUser, "status": "$status"});
       request.headers.addAll(headers);
 
       http.StreamedResponse response = await request.send();
@@ -487,10 +494,12 @@ class _DetailListCustomerState extends State<DetailListCustomer> {
             ),
             ModalRoute.withName('/'));
       } else {
-        print(response.reasonPhrase);
+        showInSnackBar(AppLocalizations.of(context)!.error, Colors.red,
+            _scaffoldKeyDetailListCustomer);
       }
     } catch (error) {
-      logger().e("error: ${error}");
+      showInSnackBar(AppLocalizations.of(context)!.error, Colors.red,
+          _scaffoldKeyDetailListCustomer);
     }
   }
 
@@ -721,8 +730,6 @@ class _DetailListCustomerState extends State<DetailListCustomer> {
 
       if (response.statusCode == 200) {
         final list = jsonDecode(await response.stream.bytesToString());
-        logger().e("list curency: $list");
-
         setState(() {
           listCurrencies = list;
         });
@@ -784,7 +791,7 @@ class _DetailListCustomerState extends State<DetailListCustomer> {
                             controller: contorllerNameDetailCustomer,
                             inputFormatters: [
                               // ignore: deprecated_member_use
-                              WhitelistingTextInputFormatter(
+                              FilteringTextInputFormatter.allow(
                                 RegExp("[a-z A-Z]"),
                               ),
                             ],
@@ -1424,6 +1431,7 @@ class _DetailListCustomerState extends State<DetailListCustomer> {
                                 setState(() {
                                   _dropDownValueAssignUserFullName =
                                       'Assign Staff' + "*";
+                                  _dropDownValueAssignUser = "";
                                 });
                               }
                             },
@@ -1626,6 +1634,7 @@ class _DetailListCustomerState extends State<DetailListCustomer> {
                                             Colors.red,
                                             _scaffoldKeyDetailListCustomer);
                                       }
+
                                       if (_dropDownValueAssignUser == "") {
                                         showInSnackBar(
                                             AppLocalizations.of(context)!
@@ -1646,8 +1655,7 @@ class _DetailListCustomerState extends State<DetailListCustomer> {
                                           controllerJobDetailCustomer
                                               .text.isNotEmpty &&
                                           _isDropDownSelectedBranch != "" &&
-                                          _dropDownValueAssignUserFullName !=
-                                              "" &&
+                                          _dropDownValueAssignUser != "" &&
                                           selectedValueVillage != "" &&
                                           selectedValueVillage !=
                                               "Village Code") {
@@ -1655,11 +1663,10 @@ class _DetailListCustomerState extends State<DetailListCustomer> {
                                           context: context,
                                           // animType: AnimType.LEFTSLIDE,
                                           width: isWeb()
-                                              ? widthView(context, 0.1)
+                                              ? widthView(context, 0.3)
                                               : isIphoneX(context)
                                                   ? widthView(context, 0.35)
                                                   : widthView(context, 0.35),
-
                                           headerAnimationLoop: false,
                                           dialogType: DialogType.SUCCES,
                                           title: AppLocalizations.of(context)!

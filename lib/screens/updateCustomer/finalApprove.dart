@@ -537,7 +537,7 @@ class _FinalApproveLoanState extends State<FinalApproveLoan> {
                             controller: contorllerNameDetailCustomer,
                             inputFormatters: [
                               // ignore: deprecated_member_use
-                              WhitelistingTextInputFormatter(
+                              FilteringTextInputFormatter.allow(
                                 RegExp("[a-z A-Z]"),
                               ),
                             ],

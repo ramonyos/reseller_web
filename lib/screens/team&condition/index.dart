@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+// import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:provider/provider.dart';
 import 'package:ccf_reseller_web_app/providers/login/index.dart';
 import 'package:ccf_reseller_web_app/screens/home/home.dart';
@@ -24,50 +24,50 @@ class TeamCondition extends StatefulWidget {
 
 class _TeamConditionState extends State<TeamCondition> {
   bool isChecked = false;
-  static final FacebookLogin facebookSignIn = new FacebookLogin();
+  // static final FacebookLogin facebookSignIn = new FacebookLogin();
 
   // by facebook
   Future<Null> initiateFacebookLogin() async {
-    if (Platform.isAndroid) {
-      final FacebookLoginResult result = await facebookSignIn.logIn(['email']);
-      switch (result.status) {
-        case FacebookLoginStatus.loggedIn:
-          https.Response graphResponse = await api().get(Uri.parse(
-              'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,picture,email&access_token=${result.accessToken.token}'));
-          final profile = jsonDecode(graphResponse.body);
-          createUserbyFacebook(profile);
-          // Add your route to home page here after sign In
-          break;
-        case FacebookLoginStatus.cancelledByUser:
-          showInSnackBar(AppLocalizations.of(context)!.cancel, Colors.red,
-              _scaffoldKeyTermAndCondition);
-          break;
-        case FacebookLoginStatus.error:
-          showInSnackBar(AppLocalizations.of(context)!.error, Colors.red,
-              _scaffoldKeyTermAndCondition);
-          break;
-      }
-    } else {
-      final FacebookLoginResult result = await facebookSignIn.logIn(['email']);
-      switch (result.status) {
-        case FacebookLoginStatus.loggedIn:
-          https.Response graphResponse = await api().get(Uri.parse(
-              'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,picture,email&access_token=${result.accessToken.token}'));
-          final profile = jsonDecode(graphResponse.body);
-          createUserbyFacebook(profile);
+    // if (Platform.isAndroid) {
+    //   final FacebookLoginResult result = await facebookSignIn.logIn(['email']);
+    //   switch (result.status) {
+    //     case FacebookLoginStatus.loggedIn:
+    //       https.Response graphResponse = await api().get(Uri.parse(
+    //           'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,picture,email&access_token=${result.accessToken.token}'));
+    //       final profile = jsonDecode(graphResponse.body);
+    //       createUserbyFacebook(profile);
+    //       // Add your route to home page here after sign In
+    //       break;
+    //     case FacebookLoginStatus.cancelledByUser:
+    //       showInSnackBar(AppLocalizations.of(context)!.cancel, Colors.red,
+    //           _scaffoldKeyTermAndCondition);
+    //       break;
+    //     case FacebookLoginStatus.error:
+    //       showInSnackBar(AppLocalizations.of(context)!.error, Colors.red,
+    //           _scaffoldKeyTermAndCondition);
+    //       break;
+    //   }
+    // } else {
+    //   final FacebookLoginResult result = await facebookSignIn.logIn(['email']);
+    //   switch (result.status) {
+    //     case FacebookLoginStatus.loggedIn:
+    //       https.Response graphResponse = await api().get(Uri.parse(
+    //           'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,picture,email&access_token=${result.accessToken.token}'));
+    //       final profile = jsonDecode(graphResponse.body);
+    //       createUserbyFacebook(profile);
 
-          // Add your route to home page here after sign In
-          break;
-        case FacebookLoginStatus.cancelledByUser:
-          showInSnackBar(AppLocalizations.of(context)!.cancel, Colors.red,
-              _scaffoldKeyTermAndCondition);
-          break;
-        case FacebookLoginStatus.error:
-          showInSnackBar(AppLocalizations.of(context)!.error, Colors.red,
-              _scaffoldKeyTermAndCondition);
-          break;
-      }
-    }
+    //       // Add your route to home page here after sign In
+    //       break;
+    //     case FacebookLoginStatus.cancelledByUser:
+    //       showInSnackBar(AppLocalizations.of(context)!.cancel, Colors.red,
+    //           _scaffoldKeyTermAndCondition);
+    //       break;
+    //     case FacebookLoginStatus.error:
+    //       showInSnackBar(AppLocalizations.of(context)!.error, Colors.red,
+    //           _scaffoldKeyTermAndCondition);
+    //       break;
+    //   }
+    // }
   }
 
   bool _isLoading = false;
